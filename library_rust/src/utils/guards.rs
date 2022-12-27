@@ -28,7 +28,10 @@ impl<'r> FromRequest<'r> for IsLogin {
         log::info!("In FromRequest !");
         let mut client = Client::connect("postgresql://cs309_proj:123456@10.24.206.44:5432/postgres", NoTls).unwrap();
         let t = 0;
-        let row = client.query_one("select id, user_id, user_name, reading, student_type, department_id, department_name, special_id, special_name, sex, college_id, college_name, grade_year, email from status",&[]);
+        let row = client.query_one("""select id, user_id, user_name, reading, 
+                                    student_type, department_id, department_name, 
+                                    special_id, special_name, sex, college_id, 
+                                    college_name, grade_year, email from status""",&[]);
         match row {
             Ok(r) => {
                 // let user_id:String = r.get(1);

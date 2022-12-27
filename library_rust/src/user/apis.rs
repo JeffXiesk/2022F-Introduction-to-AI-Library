@@ -80,25 +80,7 @@ pub async fn login(ticket: String, _r: RocketGovernor<'_, RateLimitGuard>, rb: &
             log::info!("before insert !");
             let mut client = Client::connect("postgresql://cs309_proj:123456@10.24.206.44:5432/postgres", NoTls).unwrap();
             
-            client.batch_execute("
-                DROP TABLE IF EXISTS status;
-                create table status (
-                    id int primary key ,
-                    user_id varchar,
-                    user_name varchar,
-                    reading bool,
-                    student_type varchar,
-                    department_id varchar,
-                    department_name varchar,
-                    special_id varchar,
-                    special_name varchar,
-                    sex bool,
-                    college_id varchar,
-                    college_name varchar,
-                    grade_year int,
-                    email varchar
-                );
-            ").unwrap();
+            client.batch_execute("truncate table status").unwrap();
     
 
             let a1:i32=res.id;
